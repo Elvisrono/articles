@@ -1,44 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import  cards  from './Card'
 
 const Category = ({ selectedCategory }) => {
-  // Sample data for cards
-  const cards = [
-    {
-      id: 1,
-      category: 'Fashion',
-      title: 'Top Movies of 2025',
-      image: 'https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      description: 'Discover the top-grossing movies of the year.',
-    },
-    {
-      id: 2,
-      category: 'Sports',
-      title: 'Champions League Highlights',
-      image: 'https://images.pexels.com/photos/262524/pexels-photo-262524.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      description: 'Catch up on the latest Champions League matches.',
-    },
-    {
-      id: 3,
-      category: 'Technology',
-      title: 'Tech Trends for 2025',
-      image: 'https://images.pexels.com/photos/3944460/pexels-photo-3944460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      description: 'Explore the latest advancements in technology.',
-    },
-    {
-      id: 4,
-      category: 'Travel',
-      title: 'Upcoming Blockbusters',
-      image: 'https://images.pexels.com/photos/2927607/pexels-photo-2927607.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      description: 'A sneak peek into the most anticipated movies.',
-    },
-  ];
 
-
-  
+  const navigate = useNavigate()
 
   const filteredCards = selectedCategory
     ? cards.filter((card) => card.category === selectedCategory)
     : cards;
+
+    
 
   return (
     <div className="bg-gray-100 min-h-screen p-8">
@@ -51,9 +23,13 @@ const Category = ({ selectedCategory }) => {
             key={card.id}
             className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
           >
-            <img src={card.image} alt={card.title} className="w-full h-48 object-cover" />
+            <img src={card.image} alt={card.title} 
+            
+            className="w-full h-48 object-cover" />
             <div className="p-4">
-              <h2 className="text-xl font-bold">{card.title}</h2>
+              <h2 className="text-xl font-bold cursor-pointer hover:text-blue-500"
+                onClick={() => navigate(`/card/${card.id}`)}
+                >{card.title}</h2>
               <p className="text-sm text-gray-600 mb-2">{card.category}</p>
               <p className="text-gray-700">{card.description}</p>
             </div>

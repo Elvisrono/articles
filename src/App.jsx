@@ -1,29 +1,40 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import CardList from './components/CardList';
 import Category from './components/CardList';
+import ReadPage from './components/ReadPage'; // Assuming you have a ReadPage component for viewing individual cards
 
 const App = () => {
-  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Navbar */}
-      <Navbar />
+    <Router>
+      <div className="min-h-screen flex flex-col">
+        {/* Navbar */}
+        <Navbar />
 
-      {/* Main Content: Sidebar + CardList */}
-      <div className="flex flex-1">
-        {/* Sidebar */}
-        <Sidebar setCategory={setSelectedCategory} />
+        {/* Main Content: Sidebar + Category */}
+        <div className="flex flex-1">
+          {/* Sidebar */}
+          <Sidebar setCategory={setSelectedCategory} />
 
-        {/* Main Content */}
-        <div className="flex-1 p-4">
-          <Category selectedCategory={selectedCategory} />
-          
+          {/* Main Content */}
+          <div className="flex-1 p-4">
+            <Routes>
+              {/* Home Route */}
+              <Route
+                path="/"
+                element={<Category selectedCategory={selectedCategory} />}
+              />
+              
+              {/* ReadPage Route for individual card details */}
+              <Route path="/card/:id" element={<ReadPage />} />
+            </Routes>
+          </div>
         </div>
       </div>
-    </div>
+    </Router>
   );
 };
 
