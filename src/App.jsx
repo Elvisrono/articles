@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Category from './components/CardList';
 import ReadPage from './components/ReadPage'; // Assuming you have a ReadPage component for viewing individual cards
+import Create from './components/Create';
 
 const App = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -30,6 +31,7 @@ const App = () => {
               
               {/* ReadPage Route for individual card details */}
               <Route path="/card/:id" element={<ReadPage />} />
+              <Route path='/create' element={<Create />} />
             </Routes>
           </div>
         </div>

@@ -28,7 +28,7 @@ const Navbar = () => (
           <li><Link to="">Home</Link></li>
           <li><Link to="">About</Link></li>
           <li><Link to="">Contact</Link></li>
-          <li><Link to='' >Create</Link></li>
+          <li><Link to='create' >Create</Link></li>
         </ul>
         <div  className='p-2'>
           <a  className='p-2' href="">Login</a>
