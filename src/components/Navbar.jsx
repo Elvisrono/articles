@@ -25,10 +25,10 @@ const Navbar = () => (
       <div className='flex justify-between items-center container mx-auto text-xl '>
         <h1 className='text-xl font-semibold text-blue-400'>MyLogo</h1>
         <ul className='flex gap-4 text-blue-300 '>
-          <li><Link to="">Home</Link></li>
-          <li><Link to="">About</Link></li>
-          <li><Link to="">Contact</Link></li>
-          <li><Link to='create' >Create</Link></li>
+          <li className='hover:text-blue-800'><Link to="">Home</Link></li>
+          <li className='hover:text-blue-800'><Link to="">About</Link></li>
+          <li className='hover:text-blue-800'><Link to="">Contact</Link></li>
+          <li className='hover:text-blue-800'><Link to='create' >Create</Link></li>
         </ul>
         <div  className='p-2'>
           <a  className='p-2' href="">Login</a>
