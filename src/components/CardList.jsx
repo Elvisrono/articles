@@ -5,6 +5,7 @@ import axios from 'axios';
 const Category = ({ selectedCategory }) => {
   const navigate = useNavigate();
   const [articles, setArticles] = useState([]); // Renamed to 'articles' for clarity
+  const [error, setError] = useState()
 
   // Fetch articles from the backend
   // useEffect(() => {
@@ -25,11 +26,19 @@ const Category = ({ selectedCategory }) => {
       console.log(data)
       setArticles(data)
     })
-    .catch((error) => console.log('Error fetching articles:', error))
+    .catch((error) => {
+      setError('Failed to load the articles. Please try again');
+      console.log('Error fetching articles:', error)
+    })
   }, []);
 
 
+  
 
+  // .catch((err) => {
+  //   setError('Failed to load the article. Please try again later.');
+  //   console.error('Error fetching article:', err);
+  // })
   // Filter articles based on the selected category
   const filteredArticles = selectedCategory
     ? articles.filter((article) => article.category === selectedCategory)
@@ -40,6 +49,7 @@ const Category = ({ selectedCategory }) => {
       <h1 className="text-3xl font-bold text-center text-blue-500 mb-6">
         {selectedCategory ? `${selectedCategory}` : 'All Categories'}
       </h1>
+      {error && <p className="text-red-500 mb-4 font-semibold flex justify-center">{error}</p>}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredArticles.map((article) => (
           <div
@@ -59,7 +69,7 @@ const Category = ({ selectedCategory }) => {
                 {article.title}
               </h2>
               <p className="text-sm text-gray-600 mb-2">{article.category}</p>
-              <p className="text-gray-700">{article.description}</p>
+              <p className="text-gray-700">{article.description.split(" ").slice(0, 20).join(" ")}..</p>
             </div>
           </div>
         ))}

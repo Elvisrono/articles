@@ -25,6 +25,24 @@ const ReadPage = () => {
       });
   }, [id]); // Dependency array includes `id` to re-fetch if the ID changes
 
+  const handleUpdate = () => {
+    navigate('/create', { state: { article }})
+  }
+  const handleDelete = () => {
+    if (window.confirm('Are yiu sure you want to delete this article')) {
+      axios
+        .delete(`http://127.0.0.1:8000/articles/${id}/`)
+        .then(() => {
+          alert('Article deleted successfully')
+          navigate('/')
+        })
+        .catch((err) =>{
+          console.error('Error deleting article')
+          alert('Failed to delete the article')
+        })
+    }
+  }
+
   if (loading) {
     return (
       <div className="bg-gray-100 min-h-screen p-8 flex justify-center items-center">
@@ -62,10 +80,19 @@ const ReadPage = () => {
           <h1 className="text-3xl font-bold text-blue-500 mb-2">{article.title}</h1>
           <p className="text-sm text-gray-600 mb-2">{article.category}</p>
           <p className="text-gray-700">{article.description}</p>
+          <div className='flex gap-4 mt-6'>
+            <button 
+              onClick={handleUpdate}
+              className='bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition'>Update</button>
+            <button className=' bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition'
+            onClick={handleDelete}
+            >Delete</button>
+          </div>
         </div>
       ) : (
         <p className="text-center text-lg text-gray-700">Article not found!</p>
       )}
+     
     </div>
   );
 };
